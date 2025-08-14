@@ -5,13 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calculator, ExternalLink } from "lucide-react";
-
 interface CalculationResult {
   cfm: number;
   airChanges: number;
   recommendedCFM: number;
 }
-
 const CalculatorCard = () => {
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("");
@@ -19,17 +17,14 @@ const CalculatorCard = () => {
   const [calculationType, setCalculationType] = useState("room");
   const [desiredAirChanges, setDesiredAirChanges] = useState("6");
   const [result, setResult] = useState<CalculationResult | null>(null);
-
   const calculateAirFlow = () => {
     const l = parseFloat(length);
     const w = parseFloat(width);
     const h = parseFloat(height);
     const airChanges = parseFloat(desiredAirChanges);
-
     if (!l || !w || !h || !airChanges) return;
-
     const roomVolume = l * w * h; // cubic feet
-    const cfmRequired = (roomVolume * airChanges) / 60; // CFM
+    const cfmRequired = roomVolume * airChanges / 60; // CFM
     const recommendedCFM = cfmRequired * 1.2; // 20% safety margin
 
     setResult({
@@ -38,13 +33,10 @@ const CalculatorCard = () => {
       recommendedCFM: recommendedCFM
     });
   };
-
   const handleFindMachines = () => {
     window.open('https://spycor.com/air-filtration/negative-air-machines/', '_blank');
   };
-
-  return (
-    <Card className="w-full max-w-2xl mx-auto bg-gradient-card shadow-card animate-scale-in">
+  return <Card className="w-full max-w-2xl mx-auto bg-gradient-card shadow-card animate-scale-in">
       <CardHeader className="text-center">
         <CardTitle className="flex items-center justify-center gap-2 text-2xl text-primary">
           <Calculator className="w-6 h-6" />
@@ -61,49 +53,27 @@ const CalculatorCard = () => {
             <Label htmlFor="length" className="text-sm font-medium">
               Length (ft)
             </Label>
-            <Input
-              id="length"
-              type="number"
-              placeholder="Enter length"
-              value={length}
-              onChange={(e) => setLength(e.target.value)}
-              className="bg-input border-border focus:ring-primary"
-            />
+            <Input id="length" type="number" placeholder="Enter length" value={length} onChange={e => setLength(e.target.value)} className="bg-input border-border focus:ring-primary" />
           </div>
           
           <div className="space-y-2">
             <Label htmlFor="width" className="text-sm font-medium">
               Width (ft)
             </Label>
-            <Input
-              id="width"
-              type="number"
-              placeholder="Enter width"
-              value={width}
-              onChange={(e) => setWidth(e.target.value)}
-              className="bg-input border-border focus:ring-primary"
-            />
+            <Input id="width" type="number" placeholder="Enter width" value={width} onChange={e => setWidth(e.target.value)} className="bg-input border-border focus:ring-primary" />
           </div>
           
           <div className="space-y-2">
             <Label htmlFor="height" className="text-sm font-medium">
               Height (ft)
             </Label>
-            <Input
-              id="height"
-              type="number"
-              placeholder="Enter height"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-              className="bg-input border-border focus:ring-primary"
-            />
+            <Input id="height" type="number" placeholder="Enter height" value={height} onChange={e => setHeight(e.target.value)} className="bg-input border-border focus:ring-primary" />
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="airChanges" className="text-sm font-medium">
-            Desired Air Changes per Hour
-          </Label>
+          <Label htmlFor="airChanges" className="text-sm font-medium">Room Type / Application
+        </Label>
           <Select value={desiredAirChanges} onValueChange={setDesiredAirChanges}>
             <SelectTrigger className="bg-input border-border focus:ring-primary">
               <SelectValue placeholder="Select air changes per hour" />
@@ -118,16 +88,11 @@ const CalculatorCard = () => {
           </Select>
         </div>
 
-        <Button 
-          onClick={calculateAirFlow}
-          className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground shadow-button transition-all duration-200 hover:scale-[1.02]"
-          size="lg"
-        >
+        <Button onClick={calculateAirFlow} className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground shadow-button transition-all duration-200 hover:scale-[1.02]" size="lg">
           Calculate Air Flow
         </Button>
 
-        {result && (
-          <div className="mt-6 p-6 bg-muted rounded-lg border border-border animate-fade-in">
+        {result && <div className="mt-6 p-6 bg-muted rounded-lg border border-border animate-fade-in">
             <h3 className="text-lg font-semibold text-foreground mb-4">
               Calculation Results
             </h3>
@@ -158,21 +123,13 @@ const CalculatorCard = () => {
                 to ensure optimal performance under varying conditions.
               </p>
             </div>
-          </div>
-        )}
+          </div>}
 
-        <Button 
-          onClick={handleFindMachines}
-          variant="outline"
-          className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200"
-          size="lg"
-        >
+        <Button onClick={handleFindMachines} variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200" size="lg">
           <ExternalLink className="w-4 h-4 mr-2" />
           Find Negative Air Machines
         </Button>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 export default CalculatorCard;
