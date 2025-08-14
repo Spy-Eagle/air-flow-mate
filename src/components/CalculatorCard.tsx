@@ -79,11 +79,14 @@ const CalculatorCard = () => {
               <SelectValue placeholder="Select air changes per hour" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="4">4 ACH (Light contamination)</SelectItem>
-              <SelectItem value="6">6 ACH (Moderate contamination)</SelectItem>
-              <SelectItem value="8">8 ACH (Heavy contamination)</SelectItem>
-              <SelectItem value="10">10 ACH (Severe contamination)</SelectItem>
-              <SelectItem value="12">12 ACH (Maximum filtration)</SelectItem>
+              <SelectItem value="12">Medical / Healthcare (12 ACH)</SelectItem>
+              <SelectItem value="15">Laboratory (15 ACH)</SelectItem>
+              <SelectItem value="6">Construction / Renovation (6 ACH)</SelectItem>
+              <SelectItem value="12">Mold Remediation (12 ACH)</SelectItem>
+              <SelectItem value="4">Commercial Office (4 ACH)</SelectItem>
+              <SelectItem value="2">Residential (2 ACH)</SelectItem>
+              <SelectItem value="8">Industrial (8 ACH)</SelectItem>
+              <SelectItem value="20">Clean Room (20 ACH)</SelectItem>
             </SelectContent>
           </Select>
         </div>
