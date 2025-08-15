@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, ExternalLink } from "lucide-react";
+import { Calculator, ExternalLink, Phone } from "lucide-react";
 interface CalculationResult {
   cfm: number;
   airChanges: number;
@@ -35,6 +35,10 @@ const CalculatorCard = () => {
   };
   const handleFindMachines = () => {
     window.open('https://spycor.com/air-filtration/negative-air-machines/', '_blank');
+  };
+
+  const handleRequestCall = () => {
+    window.open('tel:+1-800-SPYCOR1', '_blank');
   };
   return <Card className="w-full max-w-2xl mx-auto bg-gradient-card shadow-card animate-scale-in">
       <CardHeader className="text-center">
@@ -82,7 +86,7 @@ const CalculatorCard = () => {
               <SelectItem value="12">Medical / Healthcare (12 ACH)</SelectItem>
               <SelectItem value="15">Laboratory (15 ACH)</SelectItem>
               <SelectItem value="6">Construction / Renovation (6 ACH)</SelectItem>
-              <SelectItem value="12">Mold Remediation (12 ACH)</SelectItem>
+              
               <SelectItem value="4">Commercial Office (4 ACH)</SelectItem>
               <SelectItem value="2">Residential (2 ACH)</SelectItem>
               <SelectItem value="8">Industrial (8 ACH)</SelectItem>
@@ -128,9 +132,14 @@ const CalculatorCard = () => {
             </div>
           </div>}
 
-        <Button onClick={handleFindMachines} variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200" size="lg">
+        <Button onClick={handleFindMachines} variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 mb-4" size="lg">
           <ExternalLink className="w-4 h-4 mr-2" />
           Find Negative Air Machines
+        </Button>
+        
+        <Button onClick={handleRequestCall} variant="outline" className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-200" size="lg">
+          <Phone className="w-4 h-4 mr-2" />
+          Request a Phone Call
         </Button>
       </CardContent>
     </Card>;

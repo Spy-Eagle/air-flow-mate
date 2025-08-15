@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Info, Wind, Gauge, AlertTriangle } from "lucide-react";
+import { Info, Wind, Gauge, AlertTriangle, Heart } from "lucide-react";
 
 const QuickReference = () => {
   const airChangeRecommendations = [
@@ -7,6 +7,7 @@ const QuickReference = () => {
     { application: "Mold Remediation", ach: "8-12", icon: <AlertTriangle className="w-4 h-4" /> },
     { application: "General Construction", ach: "6-8", icon: <Gauge className="w-4 h-4" /> },
     { application: "Dust Control", ach: "4-6", icon: <Wind className="w-4 h-4" /> },
+    { application: "Occupied Healthcare Facility", ach: "12", icon: <Heart className="w-4 h-4" /> },
   ];
 
   return (

@@ -20,6 +20,7 @@ const Auth = () => {
     lastName: '',
     email: '',
     company: '',
+    phoneNumber: '',
     password: '',
     confirmPassword: ''
   });
@@ -41,7 +42,7 @@ const Auth = () => {
       return;
     }
 
-    if (!signUpData.firstName || !signUpData.lastName || !signUpData.email || !signUpData.password) {
+    if (!signUpData.firstName || !signUpData.lastName || !signUpData.email || !signUpData.phoneNumber || !signUpData.password) {
       toast({
         title: "Error",
         description: "Please fill in all required fields",
@@ -56,7 +57,8 @@ const Auth = () => {
       signUpData.password,
       signUpData.firstName,
       signUpData.lastName,
-      signUpData.company
+      signUpData.company,
+      signUpData.phoneNumber
     );
 
     if (error) {
@@ -186,6 +188,17 @@ const Auth = () => {
                     value={signUpData.company}
                     onChange={(e) => setSignUpData(prev => ({ ...prev, company: e.target.value }))}
                     placeholder="Optional"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phoneNumber">Phone Number *</Label>
+                  <Input
+                    id="phoneNumber"
+                    type="tel"
+                    value={signUpData.phoneNumber}
+                    onChange={(e) => setSignUpData(prev => ({ ...prev, phoneNumber: e.target.value }))}
+                    placeholder="Enter your phone number"
+                    required
                   />
                 </div>
                 <div className="space-y-2">
