@@ -5,24 +5,29 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calculator, ExternalLink, Phone } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 interface CalculationResult {
   cfm: number;
   airChanges: number;
   recommendedCFM: number;
 }
 const CalculatorCard = () => {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [length, setLength] = useState("");
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
   const [calculationType, setCalculationType] = useState("room");
-  const [desiredAirChanges, setDesiredAirChanges] = useState("6");
+  const [desiredAirChanges, setDesiredAirChanges] = useState("");
   const [result, setResult] = useState<CalculationResult | null>(null);
   const calculateAirFlow = () => {
     const l = parseFloat(length);
     const w = parseFloat(width);
     const h = parseFloat(height);
     const airChanges = parseFloat(desiredAirChanges);
-    if (!l || !w || !h || !airChanges) return;
+    if (!l || !w || !h || !airChanges || !desiredAirChanges) return;
     const roomVolume = l * w * h; // cubic feet
     const cfmRequired = roomVolume * airChanges / 60; // CFM
     const recommendedCFM = cfmRequired * 1.2; // 20% safety margin
@@ -37,8 +42,53 @@ const CalculatorCard = () => {
     window.open('https://spycor.com/air-filtration/negative-air-machines/', '_blank');
   };
 
-  const handleRequestCall = () => {
-    window.open('tel:+1-800-SPYCOR1', '_blank');
+  const getBusinessHoursMessage = () => {
+    const now = new Date();
+    const estTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+    const day = estTime.getDay(); // 0 = Sunday, 6 = Saturday
+    const hour = estTime.getHours();
+    
+    // Monday-Friday (1-5), 8am-4pm (8-16)
+    const isBusinessHours = day >= 1 && day <= 5 && hour >= 8 && hour < 16;
+    
+    if (isBusinessHours) {
+      return "Your request has been received. A representative will call shortly.";
+    } else {
+      return "Your request has been received. A representative will call you during regular business hours.";
+    }
+  };
+
+  const handleRequestCall = async () => {
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to request a phone call",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase.functions.invoke('request-phone-call', {
+        body: { userId: user.id }
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Request Submitted",
+        description: getBusinessHoursMessage(),
+      });
+    } catch (error: any) {
+      console.error('Error requesting phone call:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit request. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
   return <Card className="w-full max-w-2xl mx-auto bg-gradient-card shadow-card animate-scale-in">
       <CardHeader className="text-center">
@@ -80,13 +130,12 @@ const CalculatorCard = () => {
         </Label>
           <Select value={desiredAirChanges} onValueChange={setDesiredAirChanges}>
             <SelectTrigger className="bg-input border-border focus:ring-primary">
-              <SelectValue placeholder="Select air changes per hour" />
+              <SelectValue placeholder="Choose Your Application" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="12">Medical / Healthcare (12 ACH)</SelectItem>
               <SelectItem value="15">Laboratory (15 ACH)</SelectItem>
               <SelectItem value="6">Construction / Renovation (6 ACH)</SelectItem>
-              
               <SelectItem value="4">Commercial Office (4 ACH)</SelectItem>
               <SelectItem value="2">Residential (2 ACH)</SelectItem>
               <SelectItem value="8">Industrial (8 ACH)</SelectItem>
