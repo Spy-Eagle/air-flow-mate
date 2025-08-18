@@ -1,10 +1,8 @@
 import Header from "@/components/Header";
 import CalculatorCard from "@/components/CalculatorCard";
 import QuickReference from "@/components/QuickReference";
-
 const Dashboard = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="container mx-auto px-4 py-8 space-y-8">
@@ -12,10 +10,7 @@ const Dashboard = () => {
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
             Professional Air Flow Calculator
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Calculate the precise CFM requirements for your HVAC and air filtration needs. 
-            Perfect for contractors, engineers, and facility managers.
-          </p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Calculate CFM requirements for Negative Air Machines. Ideal for contractors working in hospitals or hazardous locations.</p>
         </div>
 
         <div className="space-y-12">
@@ -29,8 +24,6 @@ const Dashboard = () => {
           </p>
         </footer>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Dashboard;
