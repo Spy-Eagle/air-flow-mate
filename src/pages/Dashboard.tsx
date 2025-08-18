@@ -7,9 +7,7 @@ const Dashboard = () => {
       
       <main className="container mx-auto px-4 py-8 space-y-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-            Professional Air Flow Calculator
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">Professional Air-Flow Calculator</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Calculate CFM requirements for Negative Air Machines. Ideal for contractors working in hospitals or hazardous locations.</p>
         </div>
 
