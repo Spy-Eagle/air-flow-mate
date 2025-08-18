@@ -117,7 +117,7 @@ const QuestionDialog = ({
   };
   const remainingChars = 500 - question.length;
   return <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg bg-blue-200">
+      <DialogContent className="sm:max-w-lg bg-slate-200">
         <DialogHeader className="flex flex-row items-center justify-between">
           <DialogTitle className="text-xl font-semibold text-foreground">
             Ask a Question
