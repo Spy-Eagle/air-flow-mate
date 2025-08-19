@@ -110,7 +110,7 @@ const Auth = () => {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-heading">Welcome to Air Flow Calculator</CardTitle>
           <CardDescription>
-            Sign in to access professional HVAC calculations
+            Sign in to access Negative Air Machine Air-Flow Calculations
           </CardDescription>
         </CardHeader>
         <CardContent>

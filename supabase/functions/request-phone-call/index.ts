@@ -62,7 +62,7 @@ const handler = async (req: Request): Promise<Response> => {
           ${profile.company ? `<li><strong>Company:</strong> ${profile.company}</li>` : ''}
         </ul>
         
-        <p>Please contact this customer to discuss negative air machines and HVAC solutions.</p>
+        <p>Please contact this customer to discuss negative air machine solutions.</p>
         
         <p>Request submitted at: ${new Date().toLocaleString('en-US', { 
           timeZone: 'America/New_York',
