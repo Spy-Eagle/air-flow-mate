@@ -14,6 +14,7 @@ const Auth = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const [signUpData, setSignUpData] = useState({
     firstName: '',
@@ -68,11 +69,7 @@ const Auth = () => {
         variant: "destructive"
       });
     } else {
-      toast({
-        title: "Success!",
-        description: "Please check your email to confirm your account",
-      });
-      navigate('/');
+      setShowConfirmation(true);
     }
     setLoading(false);
   };
@@ -103,6 +100,29 @@ const Auth = () => {
     }
     setLoading(false);
   };
+
+  if (showConfirmation) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="w-full max-w-md text-center">
+          <CardHeader>
+            <CardTitle className="text-2xl font-heading">Check Your Email</CardTitle>
+            <CardDescription>
+              Check your e-mail to confirm your Sign-up to the Professional Air-Flow Calculator
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button 
+              onClick={() => navigate('/')} 
+              className="w-full"
+            >
+              Return to Login
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
