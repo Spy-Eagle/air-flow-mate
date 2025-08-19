@@ -17,8 +17,10 @@ export type Database = {
       customer_inquiries: {
         Row: {
           created_at: string
+          first_name: string | null
           id: string
           is_sent: boolean
+          last_name: string | null
           preferred_contact_method: string | null
           question: string
           updated_at: string
@@ -26,8 +28,10 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          first_name?: string | null
           id?: string
           is_sent?: boolean
+          last_name?: string | null
           preferred_contact_method?: string | null
           question: string
           updated_at?: string
@@ -35,8 +39,10 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          first_name?: string | null
           id?: string
           is_sent?: boolean
+          last_name?: string | null
           preferred_contact_method?: string | null
           question?: string
           updated_at?: string
