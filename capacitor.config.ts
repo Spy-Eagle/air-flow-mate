@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.e13bc01c5698431fbda3398307c4ae65',
+  appId: 'com.spycor.airflowcalculator',
   appName: 'Spycor Air Flow Calculator',
   webDir: 'dist',
   server: {
