@@ -4,6 +4,10 @@ const config: CapacitorConfig = {
   appId: 'com.spycor.airflowcalculator',
   appName: 'Spycor Air Flow Calculator',
   webDir: 'dist',
+  server: {
+    url: 'https://airflowcalculator.com',
+    cleartext: false
+  },
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
