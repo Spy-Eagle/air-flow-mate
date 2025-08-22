@@ -58,11 +58,8 @@ const QuestionDialog = ({
   }, [question, user, currentInquiryId]);
   const handleSend = async () => {
     if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please sign in to ask a question",
-        variant: "destructive"
-      });
+      // Redirect to auth page if not logged in
+      window.location.href = '/auth';
       return;
     }
     if (!question.trim() || !contactMethod) {

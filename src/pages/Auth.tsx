@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
   const { signUp, signIn } = useAuth();
@@ -15,6 +16,8 @@ const Auth = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
 
   const [signUpData, setSignUpData] = useState({
     firstName: '',
@@ -101,6 +104,83 @@ const Auth = () => {
     setLoading(false);
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!resetEmail.trim()) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+        redirectTo: `${window.location.origin}/auth`
+      });
+      
+      if (error) throw error;
+      
+      toast({
+        title: "Reset Email Sent",
+        description: "Check your email for password reset instructions",
+      });
+      setShowForgotPassword(false);
+      setResetEmail('');
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (showForgotPassword) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-heading text-center">Reset Password</CardTitle>
+            <CardDescription className="text-center">
+              Enter your email address and we'll send you a link to reset your password.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="reset-email">Email</Label>
+                <Input
+                  id="reset-email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Sending..." : "Send Reset Link"}
+              </Button>
+              <Button 
+                type="button" 
+                variant="outline" 
+                className="w-full"
+                onClick={() => setShowForgotPassword(false)}
+              >
+                Back to Sign In
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   if (showConfirmation) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -167,6 +247,16 @@ const Auth = () => {
                   Sign In
                 </Button>
               </form>
+              
+              <div className="mt-4 text-center">
+                <Button 
+                  variant="link" 
+                  className="text-sm text-primary hover:underline"
+                  onClick={() => setShowForgotPassword(true)}
+                >
+                  Forgot your password?
+                </Button>
+              </div>
             </TabsContent>
             
             <TabsContent value="signup">

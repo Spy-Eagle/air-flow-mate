@@ -7,9 +7,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./pages/Auth";
 import EmailConfirmation from "./pages/EmailConfirmation";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./hooks/useAuth";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -23,14 +25,10 @@ const App = () => (
           <Routes>
             <Route path="/auth" element={<Auth />} />
             <Route path="/email-confirmation" element={<EmailConfirmation />} />
-            <Route 
-              path="/" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/" element={<Dashboard />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
