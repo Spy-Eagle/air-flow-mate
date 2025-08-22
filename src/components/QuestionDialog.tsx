@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { X, Phone, MessageSquare, Mail } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -23,70 +24,39 @@ const QuestionDialog = ({
     toast
   } = useToast();
   const [question, setQuestion] = useState("");
+  const [email, setEmail] = useState("");
   const [contactMethod, setContactMethod] = useState<ContactMethod | null>(null);
-  const [currentInquiryId, setCurrentInquiryId] = useState<string | null>(null);
-
-  // Save draft question to database when user types
-  useEffect(() => {
-    if (!user || !question.trim()) return;
-    const saveDraft = async () => {
-      try {
-        if (currentInquiryId) {
-          // Update existing draft
-          await supabase.from('customer_inquiries').update({
-            question: question.trim()
-          }).eq('id', currentInquiryId);
-        } else {
-          // Create new draft
-          const {
-            data,
-            error
-          } = await supabase.from('customer_inquiries').insert({
-            user_id: user.id,
-            question: question.trim(),
-            is_sent: false
-          }).select().single();
-          if (error) throw error;
-          setCurrentInquiryId(data.id);
-        }
-      } catch (error) {
-        console.error('Error saving draft:', error);
-      }
-    };
-    const debounceTimer = setTimeout(saveDraft, 1000);
-    return () => clearTimeout(debounceTimer);
-  }, [question, user, currentInquiryId]);
   const handleSend = async () => {
-    if (!user) {
-      // Redirect to auth page if not logged in
-      window.location.href = '/auth';
-      return;
-    }
-    if (!question.trim() || !contactMethod) {
+    if (!question.trim() || !contactMethod || !email.trim()) {
       toast({
         title: "Missing Information",
-        description: "Please enter your question and select a contact method",
+        description: "Please enter your question, email address, and select a contact method",
         variant: "destructive"
       });
       return;
     }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
-      if (currentInquiryId) {
-        // Update existing inquiry and mark as sent
-        await supabase.from('customer_inquiries').update({
-          question: question.trim(),
-          preferred_contact_method: contactMethod,
-          is_sent: true
-        }).eq('id', currentInquiryId);
-      } else {
-        // Create new inquiry and mark as sent
-        await supabase.from('customer_inquiries').insert({
-          user_id: user.id,
-          question: question.trim(),
-          preferred_contact_method: contactMethod,
-          is_sent: true
-        });
-      }
+      // Create new inquiry with email
+      await supabase.from('customer_inquiries').insert({
+        user_id: user?.id || null,
+        email: email.trim(),
+        question: question.trim(),
+        preferred_contact_method: contactMethod,
+        is_sent: true
+      });
+
       toast({
         title: "Question Submitted",
         description: "Thank you for your question. We'll get back to you soon."
@@ -94,8 +64,8 @@ const QuestionDialog = ({
 
       // Reset form and close dialog
       setQuestion("");
+      setEmail("");
       setContactMethod(null);
-      setCurrentInquiryId(null);
       onOpenChange(false);
     } catch (error: any) {
       console.error('Error submitting question:', error);
@@ -108,8 +78,8 @@ const QuestionDialog = ({
   };
   const handleClose = () => {
     setQuestion("");
+    setEmail("");
     setContactMethod(null);
-    setCurrentInquiryId(null);
     onOpenChange(false);
   };
   const remainingChars = 500 - question.length;
@@ -123,6 +93,19 @@ const QuestionDialog = ({
         </DialogHeader>
 
         <div className="space-y-6 pt-4">
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-sm font-medium">
+              Your Email Address
+            </Label>
+            <Input 
+              id="email" 
+              type="email"
+              placeholder="Enter your email address..." 
+              value={email} 
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="question" className="text-sm font-medium">
               What would you like to know?
@@ -157,7 +140,7 @@ const QuestionDialog = ({
             <Button variant="outline" onClick={handleClose}>
               Exit
             </Button>
-            <Button onClick={handleSend} disabled={!question.trim() || !contactMethod} className="bg-gradient-primary hover:opacity-90 text-primary-foreground">
+            <Button onClick={handleSend} disabled={!question.trim() || !email.trim() || !contactMethod} className="bg-gradient-primary hover:opacity-90 text-primary-foreground">
               Send
             </Button>
           </div>
