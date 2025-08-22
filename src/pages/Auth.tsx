@@ -338,6 +338,16 @@ const Auth = () => {
               </form>
             </TabsContent>
           </Tabs>
+          
+          <div className="mt-6 text-center">
+            <Button 
+              variant="outline" 
+              className="w-full"
+              onClick={() => navigate('/')}
+            >
+              Continue as Guest
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>
