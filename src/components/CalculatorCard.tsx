@@ -134,15 +134,9 @@ const CalculatorCard = () => {
           Find Negative Air Machines
         </Button>
         
-        <Button onClick={() => setQuestionDialogOpen(true)} variant="outline" className="w-full border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-200" size="lg">
-          <MessageCircle className="w-4 h-4 mr-2" />
-          Ask a Question
-        </Button>
         
-        <QuestionDialog 
-          open={questionDialogOpen} 
-          onOpenChange={setQuestionDialogOpen} 
-        />
+        
+        <QuestionDialog open={questionDialogOpen} onOpenChange={setQuestionDialogOpen} />
       </CardContent>
     </Card>;
 };
