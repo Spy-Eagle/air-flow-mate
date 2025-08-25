@@ -5,7 +5,7 @@ const QuickReference = () => {
   const airChangeRecommendations = [
     { application: "Clean Rooms", ach: "15-20", icon: <Wind className="w-4 h-4" /> },
     { application: "Mold Remediation", ach: "8-12", icon: <AlertTriangle className="w-4 h-4" /> },
-    { application: "Occupied Healthcare Facility", ach: "12", icon: <Heart className="w-4 h-4" /> },
+    { application: "Healthcare Facility", ach: "12", icon: <Heart className="w-4 h-4" /> },
     { application: "General Construction", ach: "6-8", icon: <Gauge className="w-4 h-4" /> },
     { application: "Dust Control", ach: "4-6", icon: <Wind className="w-4 h-4" /> },
   ];
