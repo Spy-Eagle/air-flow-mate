@@ -1,50 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spycor Air Flow Calculator - Negative Air Machine Air-Flow Calculator</title>
-  <meta name="description" content="Professional air flow calculator for negative air machines. Calculate CFM requirements, air changes per hour, and negative air machine specifications. Perfect for contractors and engineers." />
-  <meta name="author" content="Spycor" />
-  <meta name="keywords" content="air flow calculator, CFM calculator, HVAC calculator, negative air machines, air filtration, construction ventilation, hospital construction" />
-  <meta property="og:title" content="Spycor Air Flow Calculator - Negative Air Machine Air-Flow Calculator" />
-  <meta property="og:description" content="Professional air flow calculator for negative air machines. Calculate CFM requirements and air changes per hour." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@lovable_dev" />
-  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; background-color: #f4f4f4; }
-    .calculator { background-color: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-    label, input, button { display: block; margin: 10px 0; }
-    input { padding: 5px; width: 200px; }
-    button { padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background-color: #0056b3; }
-    #result { margin-top: 20px; font-weight: bold; }
-  </style>
-</head>
-<body>
-  <h1>Spycor Air Flow Calculator</h1>
-  <div class="calculator">
-    <label for="velocity">Air Velocity (m/s):</label>
-    <input type="number" id="velocity" step="0.01" placeholder="Enter velocity">
-    <label for="area">Duct Area (m²):</label>
-    <input type="number" id="area" step="0.01" placeholder="Enter area">
-    <button onclick="calculateFlow()">Calculate Air Flow</button>
-    <div id="result"></div>
-  </div>
-  <script>
-    function calculateFlow() {
-      let velocity = parseFloat(document.getElementById("velocity").value);
-      let area = parseFloat(document.getElementById("area").value);
-      if (isNaN(velocity) || isNaN(area) || velocity <= 0 || area <= 0) {
-        document.getElementById("result").innerHTML = "Please enter valid positive numbers.";
-        return;
-      }
-      let flowRate = velocity * area;
-      document.getElementById("result").innerHTML = `Air Flow Rate: ${flowRate.toFixed(2)} m³/s`;
-    }
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spycor Air Flow Calculator - Negative Air Machine Air-Flow Calculator</title>
+    <meta name="description" content="Professional air flow calculator for negative air machines. Calculate CFM requirements, air changes per hour, and negative air machine specifications. Perfect for contractors and engineers." />
+    <meta name="author" content="Spycor" />
+    <meta name="keywords" content="air flow calculator, CFM calculator, HVAC calculator, negative air machines, air filtration, construction ventilation, hospital construction" />
+    <meta property="og:title" content="Spycor Air Flow Calculator - Negative Air Machine Air-Flow Calculator" />
+    <meta property="og:description" content="Professional air flow calculator for negative air machines. Calculate CFM requirements and air changes per hour." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
