@@ -15,42 +15,13 @@
   <meta name="twitter:site" content="@lovable_dev" />
   <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-    .calculator {
-      background-color: white;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    label, input, button {
-      display: block;
-      margin: 10px 0;
-    }
-    input {
-      padding: 5px;
-      width: 200px;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    #result {
-      margin-top: 20px;
-      font-weight: bold;
-    }
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; background-color: #f4f4f4; }
+    .calculator { background-color: white; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+    label, input, button { display: block; margin: 10px 0; }
+    input { padding: 5px; width: 200px; }
+    button { padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    #result { margin-top: 20px; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -63,7 +34,6 @@
     <button onclick="calculateFlow()">Calculate Air Flow</button>
     <div id="result"></div>
   </div>
-
   <script>
     function calculateFlow() {
       let velocity = parseFloat(document.getElementById("velocity").value);
