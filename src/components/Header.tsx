@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-card shadow-card border-b border-border pt-safe-top">
+    <header className="bg-card shadow-card border-b border-border pt-safe-top pt-12 sm:pt-safe-top sm:pt-4">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
