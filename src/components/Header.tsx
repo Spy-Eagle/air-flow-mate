@@ -26,14 +26,46 @@ const Header = () => {
     <header className="bg-card shadow-card border-b border-border pt-safe-top pt-12 sm:pt-safe-top sm:pt-4">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <button 
+              onClick={handleLogoClick}
+              className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg"
+            >
+              <img 
+                src={spycorLogo} 
+                alt="Air Flow Logo" 
+                className="h-12 w-auto"
+              />
+            </button>
+          </div>
+          
           <div className="flex items-center space-x-4">
+            <h1 className="text-xl md:text-2xl font-heading font-bold text-foreground">
+              Air Flow Calculator
+            </h1>
+            {user && (
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-muted-foreground hidden md:block">
+                  Welcome, {user?.user_metadata?.first_name || user?.email}
+                </span>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => signOut()}
+                  className="flex items-center gap-2"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span className="hidden sm:inline">Sign Out</span>
+                </Button>
+              </div>
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="p-2">
                   <Menu className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56 bg-card border-border">
+              <DropdownMenuContent align="end" className="w-56 bg-card border-border">
                 <DropdownMenuLabel>Account</DropdownMenuLabel>
                 <DropdownMenuItem onClick={() => window.location.href = '/auth'}>
                   Sign-in
@@ -70,39 +102,6 @@ const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <button 
-              onClick={handleLogoClick}
-              className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg"
-            >
-              <img 
-                src={spycorLogo} 
-                alt="Spycor Logo" 
-                className="h-12 w-auto"
-              />
-            </button>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            <h1 className="text-xl md:text-2xl font-heading font-bold text-foreground">
-              Air Flow Calculator
-            </h1>
-            {user && (
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-muted-foreground hidden md:block">
-                  Welcome, {user?.user_metadata?.first_name || user?.email}
-                </span>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => signOut()}
-                  className="flex items-center gap-2"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span className="hidden sm:inline">Sign Out</span>
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </div>
