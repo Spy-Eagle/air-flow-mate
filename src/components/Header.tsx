@@ -1,4 +1,4 @@
-import spycorLogo from "@/assets/spycor-logo.png";
+import spycorLogo from "@/assets/Air_Flow_logo.png";
 import { Button } from "@/components/ui/button";
 import { LogOut, Menu } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
