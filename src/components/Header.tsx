@@ -1,4 +1,4 @@
-import spycorLogo from "@/assets/Air_Flow_logo.png";
+import airFlowLogo from "@/assets/Air_Flow_logo.png";
 import { Button } from "@/components/ui/button";
 import { LogOut, Menu } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -32,7 +32,7 @@ const Header = () => {
               className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg"
             >
               <img 
-                src={spycorLogo} 
+                src={airFlowLogo} 
                 alt="Air Flow Logo" 
                 className="h-12 w-auto"
               />
