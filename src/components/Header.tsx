@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-card shadow-card border-b border-border pt-safe-top pt-12 sm:pt-safe-top sm:pt-4">
+    <header className="bg-card shadow-card border-b border-border" style={{ paddingTop: 'max(env(safe-area-inset-top), 1rem)' }}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
