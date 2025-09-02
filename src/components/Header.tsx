@@ -21,7 +21,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button onClick={handleLogoClick} className="transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg">
-              <img src={airFlowLogo} alt="Air Flow Logo" className="h-12 w-auto" />
+              <img src={airFlowLogo} alt="Air Flow Logo" className="h-16 w-auto" />
             </button>
           </div>
           
