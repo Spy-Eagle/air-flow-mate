@@ -14,7 +14,7 @@ const Header = () => {
   const handleContactEmail = () => {
     window.location.href = 'mailto:support@airflowcalculator.com';
   };
-  return <header className="bg-card shadow-card border-b border-border" style={{
+  return <header className="sticky top-0 z-50 bg-card shadow-card border-b border-border" style={{
     paddingTop: 'max(env(safe-area-inset-top), 1rem)'
   }}>
       <div className="container mx-auto px-4 py-4">
