@@ -4,10 +4,6 @@ const config: CapacitorConfig = {
   appId: 'com.spycor.airflowcalculator',
   appName: 'Air Flow Mate',
   webDir: 'dist',
-  server: {
-    url: "https://e13bc01c-5698-431f-bda3-398307c4ae65.lovableproject.com?forceHideBadge=true",
-    cleartext: true
-  },
   ios: {
     contentInset: 'automatic',
     scrollEnabled: true,
