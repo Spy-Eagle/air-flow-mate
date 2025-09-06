@@ -14,7 +14,6 @@ const config: CapacitorConfig = {
     presentationStyle: 'fullscreen',
     preferredContentMode: 'mobile',
     scheme: 'airflowmate',
-    path: '',
     mixedContentMode: 'compatibility',
     allowsInlineMediaPlayback: true,
     webviewCreationDelay: 0
