@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import CalculatorCard from "@/components/CalculatorCard";
 import QuickReference from "@/components/QuickReference";
 const Dashboard = () => {
+  console.log('Dashboard component is rendering');
   return <div className="min-h-screen bg-background">
       <Header />
       
